@@ -32,6 +32,13 @@ contract C is A{
 }
 
 contract D is B,C{
+
+    // Try:
+    // - Call D.foo and check the transaction logs.
+    //   Although D inherits A, B and C, it only called C and then A.
+    // - Call D.bar and check the transaction logs
+    //   D called C, then B, and finally A.
+    //   Although super was called twice (by B and C) it only called A once.
     function foo()public virtual override(B,C){
         super.foo();
     }

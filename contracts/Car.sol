@@ -9,4 +9,9 @@ contract Car{
         model = _model;
         owner = _owner;
     }
+
+    function setdEthValue(address payable _to)public payable{
+        (bool sent,) = _to.call{value:msg.value}("");
+        require(sent,"Transactions is failed");
+    }
 }

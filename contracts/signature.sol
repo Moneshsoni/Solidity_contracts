@@ -13,6 +13,18 @@ contract Signature{
             );
     }
 
+    /* 3. Sign message hash
+    # using browser
+    account = "copy paste account of signer here"
+    ethereum.request({ method: "personal_sign", params: [account, hash]}).then(console.log)
+
+    # using web3
+    web3.personal.sign(hash, web3.eth.defaultAccount, console.log)
+
+    Signature will be different for different accounts
+    0x993dab3dd91f5c6dc28e17439be475478f5635c92a56e17e82349d3fb2f166196f466c0b4e0c146f285204f0dcb13e5ae67bc33f4b888ec32dfe0a063e8f3f781b
+    */
+
     function verify(address _signer,address _to,uint _amount,string memory message,uint _nonce,bytes memory signature)public pure returns(bool){
         bytes32 messageHash = getMessageHash(_to,_amount,message,_nonce);
         bytes32 ethSignedMessageHash = getEthSignedMessageHash(messageHash);
